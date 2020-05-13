@@ -89,6 +89,7 @@ TEST_F(PathTest, Neighbors) {
     EXPECT_EQ(sp3.path_size(0, 2), 4);
     EXPECT_EQ(sp3.path_size(1, 2), 4.1);
 }
+
 }
 }
 
