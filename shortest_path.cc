@@ -13,8 +13,8 @@ namespace dijkstra {
         int dest;
         double dist;
         edge(int dest, double dist): dest(dest), dist(dist) {}
-        bool operator<(const edge& b) const {
-            return dist > b.dist;
+        friend bool operator<(const edge&a, const edge& b) {
+            return a.dist > b.dist;
         }
     };
 
