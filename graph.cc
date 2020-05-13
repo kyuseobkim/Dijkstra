@@ -16,7 +16,7 @@ Graph::Graph(double density, int size):
     create_adjacency_matrix(density);
 }
 
-int Graph::E() {
+int Graph::E() const {
     int sum = 0;
     for (int i=0; i<size; i++) {
         sum = accumulate(adjacency_matrix[i].begin(), adjacency_matrix[i].end(), sum);
@@ -24,13 +24,13 @@ int Graph::E() {
     return sum;
 }
 
-bool Graph::adjacent(int x, int y) {
+bool Graph::adjacent(int x, int y) const {
     if (x == y) return true;
     else if (x < y) return adjacency_matrix[x][y];
     else return adjacency_matrix[y][x];
 }
 
-vector<int> Graph::neighbors(int x) {
+vector<int> Graph::neighbors(int x) const {
     vector<int> ns;
     for (int i=0; i<size; i++) {
         if (i != x && adjacent(x, i)) ns.push_back(i);
@@ -44,7 +44,7 @@ void Graph::add(int x, int y) {
     else adjacency_matrix[y][x] = true;
 }
 
-double Graph::get_edge_value(int x, int y) {
+double Graph::get_edge_value(int x, int y) const {
     if (x < y) return distances[x][y];
     else return distances[y][x];
 }
