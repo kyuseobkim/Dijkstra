@@ -24,13 +24,13 @@ namespace dijkstra {
         vector<int> path;
     };
 
-    result shortest_path(const Graph* const g, int u, int w) {
+    result shortest_path(const Graph& g, int u, int w) {
         result r;
         vector<double> distances;
         vector<int> path;
         vector<int> predecessors;
 
-        int edges = g->V();
+        int edges = g.V();
         distances.resize(edges, 10000);
         predecessors.resize(edges);
 
@@ -39,8 +39,8 @@ namespace dijkstra {
         for (int i=0; i<edges; i++) {
             double distance = 10000;
             if (i != u) {
-                if (g->adjacent(u, i)) {
-                    distance = g->get_edge_value(i, u);
+                if (g.adjacent(u, i)) {
+                    distance = g.get_edge_value(i, u);
                 }
             } else {
                 distance = 0; 
@@ -52,8 +52,8 @@ namespace dijkstra {
             edge e = pq.top();
             pq.pop();
             if (e.dist >= max_dist) break; // unreachable
-            for (int v : g->neighbors(e.dest)) {
-                double alt_dist = distances[e.dest] + g->get_edge_value(e.dest, v);
+            for (int v : g.neighbors(e.dest)) {
+                double alt_dist = distances[e.dest] + g.get_edge_value(e.dest, v);
                 if (distances[v] > alt_dist) {
                     distances[v] = alt_dist; 
                     pq.push(edge(v, alt_dist));

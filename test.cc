@@ -58,7 +58,7 @@ class PathTest : public ::testing::Test {
         // void TearDown() override { }
 
         Graph g3 {0, 10};
-        ShortestPath sp {&g3};
+        ShortestPath sp {g3};
 };
 
 TEST_F(PathTest, PathSize) {
@@ -77,7 +77,10 @@ TEST_F(PathTest, PathSize) {
     ASSERT_EQ(path.size(), 2);
     EXPECT_EQ(path[0], 0);
     EXPECT_EQ(path[1], 1);
+}
 
+
+TEST_F(PathTest, SimplePath) {
     g3.add(0, 2);
     g3.set_edge_value(0, 2, 5);
     g3.add(1, 2);
@@ -86,7 +89,7 @@ TEST_F(PathTest, PathSize) {
     EXPECT_EQ(sp.path_size(0, 2), 4.1);
     EXPECT_EQ(sp.path_size(1, 2), 4);
 
-    path = sp.path(0, 2);
+    vector<int> path = sp.path(0, 2);
     ASSERT_EQ(path.size(), 3);
     EXPECT_EQ(path[0], 0);
     EXPECT_EQ(path[1], 1);
