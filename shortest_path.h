@@ -9,11 +9,11 @@ namespace dijkstra {
 
 class ShortestPath {
     public:
-        ShortestPath(Graph* const g): g(g) {}
+        ShortestPath(const Graph& g): g(g) {}
         double path_size(int u, int w);
         vector<int> path(int u, int w);
     private:
-        Graph* const g;
+        const Graph& g;
 };
 
 }
