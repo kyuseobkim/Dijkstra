@@ -26,13 +26,10 @@ namespace dijkstra {
 
     result shortest_path(const Graph& g, int u, int w) {
         result r;
-        vector<double> distances;
-        vector<int> path;
-        vector<int> predecessors;
-
         int edges = g.V();
-        distances.resize(edges, 10000);
-        predecessors.resize(edges);
+        vector<double> distances(edges, 10000);
+        vector<int> path;
+        vector<int> predecessors(edges);
 
         distances[u] = 0;
         priority_queue<edge> pq;
