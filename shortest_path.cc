@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 #include <queue>
 #include <vector>
 
@@ -7,7 +8,8 @@
 using namespace std;
 
 namespace dijkstra {
-    const int max_dist = 10;
+    const double max = numeric_limits<double>::max();
+    const double infty = numeric_limits<double>::infinity();
 
     struct edge {
         int dest;
@@ -31,13 +33,13 @@ namespace dijkstra {
         vector<int> predecessors;
 
         int edges = g.V();
-        distances.resize(edges, 10000);
+        distances.resize(edges, infty);
         predecessors.resize(edges);
 
         distances[u] = 0;
         priority_queue<edge> pq;
         for (int i=0; i<edges; i++) {
-            double distance = 10000;
+            double distance = infty;
             if (i != u) {
                 if (g.adjacent(u, i)) {
                     distance = g.get_edge_value(i, u);
@@ -51,7 +53,7 @@ namespace dijkstra {
         while (pq.size() > 0) {
             edge e = pq.top();
             pq.pop();
-            if (e.dist >= max_dist) break; // unreachable
+            if (e.dist >= max) break; // unreachable
             for (int v : g.neighbors(e.dest)) {
                 double alt_dist = distances[e.dest] + g.get_edge_value(e.dest, v);
                 if (distances[v] > alt_dist) {
@@ -63,7 +65,7 @@ namespace dijkstra {
             if (e.dest == w) break;
         }
 
-        if (distances[w] >= max_dist) {
+        if (distances[w] >= max) {
             r.reachable = false;
         } else {
             int temp = w;
